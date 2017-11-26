@@ -154,6 +154,7 @@ void inf_type_neighbours(canvas * _canvas, cell * _cell) {
         int nx = x + directions[i][1];
         nx = nx >= _canvas->width ? 0 : nx;
         nx = nx < 0 ? _canvas->width-1 : nx;
+        
         _cell->neighbours[i] = _canvas->cells[ny][nx];
     }
 }
@@ -180,19 +181,7 @@ void bottle_type_neighbours(canvas * _canvas, cell * _cell) {
             nx = 0;
             ny = (_canvas->height-1) - ny;
         }
-        if(nx == x && ny == y) {
-            _cell->neighbours[i] = NULL;
-            continue;
-        }
-        
-        cell * neighbour = _canvas->cells[ny][nx];
-        for(int j = 0; j < i; j++) {
-            if(_cell->neighbours[j] == neighbour) {
-                neighbour = NULL;
-                break;
-            }
-        }
-        
-        _cell->neighbours[i] = neighbour;
+
+        _cell->neighbours[i] = _canvas->cells[ny][nx];
     }
 }
